@@ -3,22 +3,28 @@ dbus module. I am using inotify to watch config file changes, rebuild the
 blacklist after every file change.
 
 Configure the system 
---------------------
+====================
 cp test.conf /etc/dbus-1/system.d/test.conf
 cp .libs/libpam_dbus_verify.so /lib64/security/
 open /etc/pam.d/sshd and add below line in top of the file.
 	<auth       required     libpam_dbus_verify.so>
 
+Things to install
+=================
 zypper install dbus-1
 zypper install dbus-1-devel
+zypper install libtool
+zypper install pam-devel
+
 
 Compile
--------
+=======
     ./autogen.sh
     make
 
 Test the server/client
----------------------- 
+======================
 Terminal 1(Server):
-    ./dbus_pam ./blacklist
+    ./dbus_pam ./blacklist [blacklist file contains username]
+	Now try doing ssh to the machine!
 

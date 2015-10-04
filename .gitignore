@@ -1,0 +1,7 @@
+config.log
+makefile.in
+*.o
+./libs
+./deps
+Makefile
+Makefile.in

@@ -129,8 +129,7 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libpam_dbus_verify_la_DEPENDENCIES =
-am_libpam_dbus_verify_la_OBJECTS =  \
-	libpam_dbus_verify_la-pam_dbus_verify.lo \
+am_libpam_dbus_verify_la_OBJECTS = libpam_dbus_verify_la-pam.lo \
 	libpam_dbus_verify_la-logger.lo
 libpam_dbus_verify_la_OBJECTS = $(am_libpam_dbus_verify_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -352,7 +351,7 @@ AM_LDFLAGS = @DBUS_LIBS@ -lpthread
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4 
 dbus_pam_SOURCES = dbus_pam_verify.c logger.c logger.h watcher.c
 lib_LTLIBRARIES = libpam_dbus_verify.la
-libpam_dbus_verify_la_SOURCES = pam_dbus_verify.c logger.c
+libpam_dbus_verify_la_SOURCES = pam.c logger.c
 libpam_dbus_verify_la_LIBADD = @DBUS_LIBS@ 
 libpam_dbus_verify_la_LDFLAGS = @DBUS_LIBS@ 
 libpam_dbus_verify_la_CFLAGS = @DBUS_CFLAGS@ 
@@ -511,7 +510,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dbus_pam_verify.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpam_dbus_verify_la-logger.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpam_dbus_verify_la-pam_dbus_verify.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpam_dbus_verify_la-pam.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logger.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/watcher.Po@am__quote@
 
@@ -536,12 +535,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-libpam_dbus_verify_la-pam_dbus_verify.lo: pam_dbus_verify.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpam_dbus_verify_la_CFLAGS) $(CFLAGS) -MT libpam_dbus_verify_la-pam_dbus_verify.lo -MD -MP -MF $(DEPDIR)/libpam_dbus_verify_la-pam_dbus_verify.Tpo -c -o libpam_dbus_verify_la-pam_dbus_verify.lo `test -f 'pam_dbus_verify.c' || echo '$(srcdir)/'`pam_dbus_verify.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpam_dbus_verify_la-pam_dbus_verify.Tpo $(DEPDIR)/libpam_dbus_verify_la-pam_dbus_verify.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='pam_dbus_verify.c' object='libpam_dbus_verify_la-pam_dbus_verify.lo' libtool=yes @AMDEPBACKSLASH@
+libpam_dbus_verify_la-pam.lo: pam.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpam_dbus_verify_la_CFLAGS) $(CFLAGS) -MT libpam_dbus_verify_la-pam.lo -MD -MP -MF $(DEPDIR)/libpam_dbus_verify_la-pam.Tpo -c -o libpam_dbus_verify_la-pam.lo `test -f 'pam.c' || echo '$(srcdir)/'`pam.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libpam_dbus_verify_la-pam.Tpo $(DEPDIR)/libpam_dbus_verify_la-pam.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='pam.c' object='libpam_dbus_verify_la-pam.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpam_dbus_verify_la_CFLAGS) $(CFLAGS) -c -o libpam_dbus_verify_la-pam_dbus_verify.lo `test -f 'pam_dbus_verify.c' || echo '$(srcdir)/'`pam_dbus_verify.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpam_dbus_verify_la_CFLAGS) $(CFLAGS) -c -o libpam_dbus_verify_la-pam.lo `test -f 'pam.c' || echo '$(srcdir)/'`pam.c
 
 libpam_dbus_verify_la-logger.lo: logger.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpam_dbus_verify_la_CFLAGS) $(CFLAGS) -MT libpam_dbus_verify_la-logger.lo -MD -MP -MF $(DEPDIR)/libpam_dbus_verify_la-logger.Tpo -c -o libpam_dbus_verify_la-logger.lo `test -f 'logger.c' || echo '$(srcdir)/'`logger.c

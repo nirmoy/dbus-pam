@@ -8,7 +8,7 @@ dbus_pam_SOURCES = dbus_pam_verify.c logger.c logger.h watcher.c
 
 
 lib_LTLIBRARIES = libpam_dbus_verify.la
-libpam_dbus_verify_la_SOURCES = pam_dbus_verify.c logger.c
+libpam_dbus_verify_la_SOURCES = pam.c logger.c
 libpam_dbus_verify_la_LIBADD = @DBUS_LIBS@ 
 libpam_dbus_verify_la_LDFLAGS = @DBUS_LIBS@ 
 libpam_dbus_verify_la_CFLAGS = @DBUS_CFLAGS@ 

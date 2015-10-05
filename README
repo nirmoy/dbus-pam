@@ -28,3 +28,4 @@ Terminal 1(Server):
     ./dbus_pam ./blacklist [blacklist file contains username]
 	Now try doing ssh to the machine!
 
+TODO: syslog for pam.c

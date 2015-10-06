@@ -20,9 +20,15 @@
 
 void *watcher(void *data);
 
+pthread_t udev_sniffer_thread;
+void *do_udev_sniff(void *data);
+pthread_mutex_t udev_lock;
+
 pthread_t config_file_watcher;
 pthread_mutex_t lock;
+
 int thread_run = 1;
+int bypass_root = 0;
 char *blacklist_users[MAX_USER];
 unsigned int total_user;
 
@@ -80,6 +86,12 @@ char *trimwhitespace(char *str)
 int is_blocked(char *name) 
 {
 	int i = 0;
+    /* I should match uid?? */
+    log("%s %s %d", "root", name, bypass_root);
+    if ((strncmp(name, "root", 4) == 0) && bypass_root) {
+        log("Bypassing root");
+        return 0;
+    }
 
 	while (i < total_user) {
 		if (strcmp(blacklist_users[i++], name) == 0)
@@ -193,6 +205,23 @@ void serve(char *method_name)
 
 }
 
+void create_thread(pthread_t *thread, void *(*start_routine) (void *), void *data)
+{
+    if(pthread_create(thread, NULL, start_routine, data)) {
+        log_err("Error creating thread\n");
+        exit(1);
+    }
+
+}
+
+void join_thread(pthread_t thread)
+{	
+    if(pthread_join(thread, NULL)) {
+        log_err("Error joining thread\n");
+        return;
+    }
+}
+
 int main(int argc, char** argv)
 { 
 	if (2 > argc) {
@@ -210,27 +239,21 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	
-	if (pthread_mutex_init(&lock, NULL) != 0)
-	{
+	if (pthread_mutex_init(&lock, NULL) || pthread_mutex_init(&udev_lock, NULL)) {
 		log_err("\n mutex init failed\n");
 		return 1;
 	}
-	
-	if(pthread_create(&config_file_watcher, NULL, watcher, argv[1])) {
+	create_thread(&config_file_watcher, watcher, argv[1]);
+    create_thread(&udev_sniffer_thread, do_udev_sniff, NULL);
 
-		log_err("Error creating thread\n");
-		return 1;
-
-	}
 	/* Meat */
     serve("Echo");
-	thread_run = 0;
-	if(pthread_join(config_file_watcher, NULL)) {
+    /* End Meat*/
 
-		log_err("Error joining thread\n");
-		return 1;
-	}
-
+    thread_run = 0;
+    join_thread(config_file_watcher);
+    join_thread(udev_sniffer_thread);
+    
 	pthread_mutex_destroy(&lock);
 
     return 0;

@@ -4,7 +4,7 @@ AM_LDFLAGS= @DBUS_LIBS@ -lpthread
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4 
 
 bin_PROGRAMS = dbus_pam
-dbus_pam_SOURCES = dbus_pam_verify.c logger.c logger.h watcher.c
+dbus_pam_SOURCES = dbus_pam_verify.c logger.c logger.h watcher.c sniff_uevent.c
 
 
 lib_LTLIBRARIES = libpam_dbus_verify.la
